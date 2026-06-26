@@ -38,15 +38,11 @@ const generateColorBoxes = () => {
       const colorDiv = document.createElement("div");
       const colorSpan = document.createElement("span");
       const buttonsContainer = document.createElement("div");
-
       const color = generateRandomColorHex();
-
       colorSpan.id = `color-${i}`;
       colorSpan.textContent = color;
       colorSpan.classList.add("colorSpan");
-
       buttonsContainer.classList.add("buttons-container");
-
       buttonsContainer.innerHTML = `
         <button class="save-btn" id="save-btn-${i}">
           <p> ♡ </p>
@@ -58,12 +54,9 @@ const generateColorBoxes = () => {
       `;
       colorDiv.classList.add("color-box");
       colorDiv.style.backgroundColor = color;
-
-      colorDiv.appendChild(buttonsContainer);
       colorDiv.appendChild(colorSpan);
-
+      colorDiv.appendChild(buttonsContainer);
       container.appendChild(colorDiv);
-
       currentColors.push(color);
       const colorButtonSave = document.getElementById(`save-btn-${i}`);
       const colorButtonCopy = document.getElementById(`copy-btn-${i}`);
@@ -83,9 +76,7 @@ const generateColorBoxes = () => {
       const colorDiv = document.createElement("div");
       const colorSpan = document.createElement("span");
       const buttonsContainer = document.createElement("div");
-
       const color = generateRandomColorHSL();
-
       colorSpan.id = `color-${i}`;
       colorSpan.textContent = color;
       colorSpan.classList.add("colorSpan");
@@ -101,11 +92,9 @@ const generateColorBoxes = () => {
       `;
       colorDiv.classList.add("color-box");
       colorDiv.style.backgroundColor = color;
-
-      colorDiv.appendChild(buttonsContainer);
       colorDiv.appendChild(colorSpan);
+      colorDiv.appendChild(buttonsContainer);
       container.appendChild(colorDiv);
-
       currentColors.push(color);
       const colorButtonSave = document.getElementById(`save-btn-${i}`);
       const colorButtonCopy = document.getElementById(`copy-btn-${i}`);
@@ -126,11 +115,9 @@ const generateColorBoxes = () => {
 function hexToHsl(color) {
   if (typeof color === "string" && color.startsWith("#")) {
     let hex = color.slice(1);
-
     let r = parseInt(hex.slice(0, 2), 16) / 255;
     let g = parseInt(hex.slice(2, 4), 16) / 255;
     let b = parseInt(hex.slice(4, 6), 16) / 255;
-
     let max = Math.max(r, g, b);
     let min = Math.min(r, g, b);
     let h, s;
@@ -140,9 +127,7 @@ function hexToHsl(color) {
       h = s = 0;
     } else {
       let d = max - min;
-
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
       switch (max) {
         case r:
           h = (g - b) / d + (g < b ? 6 : 0);
@@ -154,10 +139,8 @@ function hexToHsl(color) {
           h = (r - g) / d + 4;
           break;
       }
-
       h *= 60;
     }
-
     return `hsl(${Math.round(h)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
   }
 }
@@ -205,6 +188,12 @@ function convertColor(color) {
     return hslToHex(color);
   }
 }
+
+//aca empiezo con mi funcion de refreshPalette para volver a generar colores si algunos estan bloqueados o no
+
+const refreshPalette = () => {
+  //aca iria mi codigo SI TUVIERA UNO D;
+};
 
 //Funciones que calculan la luz de mi color para mostrar el span blanco o negro segun sea necesario para mejo9r contraste
 const getLightness = (color) => {
@@ -275,6 +264,7 @@ miSelect.addEventListener("change", function () {
 }); // aun tenemos que ajustar estilos para letras etc. pero al menos tenemos la funcionalidad basica.
 
 //funcion para evento click de tipo tooltip para boton copiar, uso la misma logica para mi boton guardar
+//  , ver como hacerla dinamica para acortar codigo despues.
 const showTooltipCopy = (event) => {
   console.log("entré al tooltip");
   const tooltip = document.createElement("div");
@@ -306,3 +296,4 @@ const showTooltipSave = (event) => {
 
 generateColorBoxes();
 calculateSaturation(currentColors);
+console.log(currentColors);
