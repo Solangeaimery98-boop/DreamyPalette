@@ -192,7 +192,7 @@ function convertColor(color) {
 //aca empiezo con mi funcion de refreshPalette para volver a generar colores si algunos estan bloqueados o no
 
 const refreshPalette = () => {
-  //aca iria mi codigo SI TUVIERA UNO D;
+  //aca iria mi codigo SI TUVIERA UNO :c
 };
 
 //Funciones que calculan la luz de mi color para mostrar el span blanco o negro segun sea necesario para mejo9r contraste
@@ -254,12 +254,12 @@ selectedFormat.addEventListener("change", function () {
 
 miSelect.addEventListener("change", function () {
   if (miSelect.value === "white") {
-    navbar.style.backgroundColor = "white";
-    interactionContainer.style.backgroundColor = "white";
+    navbar.style.borderBottom = "15px solid white";
+    interactionContainer.style.borderTop = "15px solid white";
   }
   if (miSelect.value === "black") {
-    navbar.style.backgroundColor = "black";
-    interactionContainer.style.backgroundColor = "black";
+    navbar.style.borderBottom = "15px solid black";
+    interactionContainer.style.borderTop = "15px solid black";
   }
 }); // aun tenemos que ajustar estilos para letras etc. pero al menos tenemos la funcionalidad basica.
 
@@ -283,7 +283,7 @@ const showTooltipCopy = (event) => {
 const showTooltipSave = (event) => {
   console.log("entré al tooltip save");
   const tooltip = document.createElement("div");
-  tooltip.textContent = "color saved";
+  tooltip.textContent = "Color saved";
   tooltip.classList.add("tooltip");
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY - 40}px`;
