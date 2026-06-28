@@ -303,7 +303,7 @@ miSelect.addEventListener("change", function () {
 const showTooltipCopy = (event) => {
   console.log("entré al tooltip");
   const tooltip = document.createElement("div");
-  tooltip.textContent = "✓ Copiado";
+  tooltip.textContent = "✓ Copied";
   tooltip.classList.add("tooltip");
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY - 40}px`;
