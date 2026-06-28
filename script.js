@@ -57,7 +57,11 @@ const generateColorBoxes = () => {
       colorDiv.appendChild(colorSpan);
       colorDiv.appendChild(buttonsContainer);
       container.appendChild(colorDiv);
-      currentColors.push(color);
+      currentColors.push({
+        color: color,
+        id: colorSpan.id,
+        isSaved: false,
+      });
       const colorButtonSave = document.getElementById(`save-btn-${i}`);
       const colorButtonCopy = document.getElementById(`copy-btn-${i}`);
       colorButtonCopy.addEventListener("click", function () {
@@ -95,7 +99,11 @@ const generateColorBoxes = () => {
       colorDiv.appendChild(colorSpan);
       colorDiv.appendChild(buttonsContainer);
       container.appendChild(colorDiv);
-      currentColors.push(color);
+      currentColors.push({
+        color: color,
+        id: colorSpan.id,
+        isSaved: false,
+      });
       const colorButtonSave = document.getElementById(`save-btn-${i}`);
       const colorButtonCopy = document.getElementById(`copy-btn-${i}`);
       colorButtonSave.addEventListener("click", function (event) {
@@ -216,7 +224,7 @@ const calculateSaturation = (array) => {
     const colorSpan = document.getElementById(`color-${i}`);
     const colorButtonSave = document.getElementById(`save-btn-${i}`);
     const colorButtonCopy = document.getElementById(`copy-btn-${i}`);
-    const lightness = getLightness(array[i]);
+    const lightness = getLightness(array[i].color);
     if (lightness <= 55) {
       colorSpan.style.color = "white";
       colorButtonCopy.style.color = "white";
@@ -245,10 +253,10 @@ generateButton.addEventListener("click", function () {
 
 selectedFormat.addEventListener("change", function () {
   for (let i = 0; i < currentColors.length; i++) {
-    const color = convertColor(currentColors[i]);
+    const color = convertColor(currentColors[i].color);
     const colorSpan = document.getElementById(`color-${i}`);
     colorSpan.textContent = color;
-    currentColors[i] = convertColor(currentColors[i]); //aca reemplazo el valor anterior de mi array por el nuevo modificado.
+    currentColors[i].color = convertColor(currentColors[i].color); //aca reemplazo el valor anterior de mi array por el nuevo modificado.
   }
 });
 
