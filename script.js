@@ -36,13 +36,14 @@ const createColorBox = (color, index) => {
   buttonsContainer.classList.add("buttons-container");
   buttonsContainer.innerHTML = `
         <button class="save-btn" id="save-btn-${index}">
-          <p> ♡ </p>
+          <i class="fa-regular fa-heart"></i>
         </button>
 
         <button class="copy-btn" id="copy-btn-${index}">
           <p> ⧉ </p>
         </button>
       `;
+  //<i class="fa-solid fa-heart"></i> // este voy a neceitar cuando lo neceste lleno, todavia me falta la logik
   colorDiv.classList.add("color-box");
   colorDiv.style.backgroundColor = color;
   colorDiv.appendChild(colorSpan);
@@ -59,10 +60,14 @@ const addColorBoxEvents = (index, color) => {
   });
   colorButtonSave.addEventListener("click", function (event) {
     currentColors[index].isSaved = !currentColors[index].isSaved;
+    const icon = colorButtonSave.querySelector("i");
+
     if (currentColors[index].isSaved) {
-      colorButtonSave.textContent = "♥︎";
+      icon.classList.remove("fa-regular");
+      icon.classList.add("fa-solid");
     } else {
-      colorButtonSave.textContent = "♡";
+      icon.classList.remove("fa-solid");
+      icon.classList.add("fa-regular");
     }
     showTooltipSave(event, currentColors[index].isSaved);
   });
