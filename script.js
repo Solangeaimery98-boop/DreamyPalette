@@ -7,6 +7,8 @@ const interactionContainer = document.getElementById("interactionContainer");
 const selectedFormat = document.getElementById("format");
 let currentColors = [];
 
+//Funciones para generacion de los colores aleatorios
+
 const generateRandomColorHex = () => {
   let color = "#";
   for (let i = 0; i < 6; i++) {
@@ -24,7 +26,9 @@ const generateRandomColorHSL = () => {
   return color;
 };
 
-////codigo nuevo refactorizado , lo dividi en funcionalidades por que hacia muchas cosas.
+//Funcion que se encarga de generar las box de colores, la refactorizamos varias veces y la dividimos ya que se encargaba
+//de muchas responsabilidades. ahora son 3 funciones.
+
 const createColorBox = (color, index) => {
   const colorDiv = document.createElement("div");
   const colorSpan = document.createElement("span");
@@ -99,7 +103,8 @@ const generateColorBoxes = () => {
     }
   }
 };
-////codigo nuevo refactorizado
+
+////codigo nuevo refactorizado ⬆️
 
 //funcion unica y exclusiva para cuando cambio el select de formato elegido y
 //no se modifiquen los colores solo el formato y el span
@@ -180,7 +185,7 @@ function convertColor(color) {
   }
 }
 
-//aca empiezo con mi funcion de refreshPalette para volver a generar colores si algunos estan bloqueados o no
+// Funciones que actualizan la paleta segun sea requerido.
 
 const refreshPalette = (array) => {
   for (let i = 0; i < array.length; i++) {
@@ -265,6 +270,8 @@ const calculateSaturation = (array) => {
   }
 };
 
+//Eventos
+
 const radioButtons = document.querySelectorAll('input[name="size"]');
 radioButtons.forEach((radiobutton) => {
   radiobutton.addEventListener("click", function () {
@@ -290,7 +297,7 @@ selectedFormat.addEventListener("change", function () {
     const color = convertColor(currentColors[i].color);
     const colorSpan = document.getElementById(`color-${i}`);
     colorSpan.textContent = color;
-    currentColors[i].color = convertColor(currentColors[i].color); //aca reemplazo el valor anterior de mi array por el nuevo modificado.
+    currentColors[i].color = convertColor(currentColors[i].color);
   }
 });
 
@@ -305,18 +312,14 @@ miSelect.addEventListener("change", function () {
   }
 });
 
-//funcion para evento click de tipo tooltip para boton copiar, uso la misma logica para mi boton guardar
-//  , ver como hacerla dinamica para acortar codigo despues.
+// Tooltips
 const showTooltipCopy = (event) => {
-  console.log("entré al tooltip");
   const tooltip = document.createElement("div");
   tooltip.textContent = "✓ Copied";
   tooltip.classList.add("tooltip");
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY - 40}px`;
   document.body.appendChild(tooltip);
-  console.log(tooltip);
-
   setTimeout(() => {
     tooltip.remove();
   }, 1000);
@@ -325,7 +328,6 @@ const showTooltipCopy = (event) => {
 const showTooltipSave = (event, isSaved) => {
   const tooltip = document.createElement("div");
   if (isSaved) {
-    console.log("entre al if unsaved");
     tooltip.textContent = "Color saved";
     tooltip.classList.add("tooltip");
     tooltip.style.left = `${event.clientX}px`;
@@ -349,4 +351,3 @@ const showTooltipSave = (event, isSaved) => {
 updatePaletteSize(6);
 generateColorBoxes();
 calculateSaturation(currentColors);
-console.log(currentColors);
